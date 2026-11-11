@@ -1,0 +1,389 @@
+<title>Frigo di Maria Marra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: un frigorifero verticale al centro; ogni ripiano, il freezer, il cassetto e la porta sono bottoni che aprono il loro contenuto. */
+:root{
+  --bg:#e9f0f2; --ink:#12262c; --ink-2:#4b6168; --line:#c9d8dc;
+  --enamel:#f8fbfc; --steel:#aebfc5;
+  --accent-user:#117f92; --accent:var(--accent-user); --accent-ink:#ffffff; --chip:#ffffff; --chip-ink:#12262c;
+  --warn:#b45309; --warn-bg:#fdecc8; --bad:#b42318; --bad-bg:#fde2df; --ok:#1f7a4d;
+  --sheet:#ffffff; --field:#f1f6f7; --shadow:0 18px 40px rgba(18,38,44,.16);
+  --display:'Bricolage Grotesque','Avenir Next','Segoe UI',system-ui,sans-serif;
+  --body:'DM Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+  --interior:color-mix(in srgb,var(--accent) 13%,var(--enamel));
+  --interior-2:color-mix(in srgb,var(--accent) 24%,var(--enamel));
+  --glass:color-mix(in srgb,var(--accent) 45%,var(--enamel));
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1517; --ink:#e6f1f3; --ink-2:#92a9b0; --line:#25383d;
+  --enamel:#17252a; --steel:#3a5058;
+  --accent:color-mix(in srgb,var(--accent-user) 60%,#fff); --accent-ink:#06191d; --chip:#223940; --chip-ink:#e6f1f3;
+  --warn:#f5b955; --warn-bg:#3d2d10; --bad:#ff8c80; --bad-bg:#43211e; --ok:#6fd6a1;
+  --sheet:#14232a; --field:#1d3038; --shadow:0 18px 40px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1517; --ink:#e6f1f3; --ink-2:#92a9b0; --line:#25383d;
+  --enamel:#17252a; --steel:#3a5058;
+  --accent:color-mix(in srgb,var(--accent-user) 60%,#fff); --accent-ink:#06191d; --chip:#223940; --chip-ink:#e6f1f3;
+  --warn:#f5b955; --warn-bg:#3d2d10; --bad:#ff8c80; --bad-bg:#43211e; --ok:#6fd6a1;
+  --sheet:#14232a; --field:#1d3038; --shadow:0 18px 40px rgba(0,0,0,.5); color-scheme:dark}
+
+@font-face{font-family:'Bricolage Grotesque';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/bricolage-grotesque-700.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/dm-sans-400.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url(fonts/dm-sans-500.woff2) format('woff2')}
+@font-face{font-family:'DM Sans';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/dm-sans-700.woff2) format('woff2')}
+@font-face{font-family:'Nunito';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/nunito-400.woff2) format('woff2')}
+@font-face{font-family:'Nunito';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/nunito-700.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/poppins-400.woff2) format('woff2')}
+@font-face{font-family:'Poppins';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/poppins-700.woff2) format('woff2')}
+@font-face{font-family:'Lora';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/lora-400.woff2) format('woff2')}
+@font-face{font-family:'Lora';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/lora-700.woff2) format('woff2')}
+@font-face{font-family:'Caveat';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/caveat-400.woff2) format('woff2')}
+@font-face{font-family:'Caveat';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/caveat-700.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-weight:400;font-style:normal;font-display:swap;src:url(fonts/jetbrains-mono-400.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-weight:700;font-style:normal;font-display:swap;src:url(fonts/jetbrains-mono-700.woff2) format('woff2')}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 var(--body);
+  padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+h1{font:700 clamp(30px,8vw,38px)/1 var(--display);letter-spacing:-.02em;margin:0}
+.sub{color:var(--ink-2);font-size:14px;margin-top:6px}
+.iconbtn{border:1px solid var(--line);background:var(--enamel);border-radius:12px;padding:10px 14px;font-weight:500;font-size:14px}
+.iconbtn:hover{border-color:var(--accent)}
+
+.search{display:flex;gap:8px}
+.search input{flex:1;min-width:0;border:1px solid var(--line);background:var(--enamel);border-radius:12px;padding:12px 14px}
+.alert{display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:12px;padding:10px 14px;font-size:14px;font-weight:500;border:0;width:100%;text-align:left}
+.alert.warn{background:var(--warn-bg);color:var(--warn)}
+.alert.ok{background:var(--field);color:var(--ink-2)}
+.alert b{font-weight:700}
+.example{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--ink-2);border:1px dashed var(--steel);border-radius:12px;padding:8px 12px}
+.example button{border:0;background:none;color:var(--accent);font-weight:700;padding:4px 2px}
+
+/* frigorifero */
+.fridge{position:relative;background:var(--enamel);border:2px solid var(--steel);border-radius:30px;padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
+.fridge::after{content:"";position:absolute;left:12px;right:12px;bottom:-9px;height:9px;border-radius:0 0 10px 10px;background:var(--steel);opacity:.6;z-index:-1}
+.zone{border-radius:18px;background:linear-gradient(180deg,var(--interior) 0%,var(--interior-2) 100%);padding:8px;display:flex;gap:8px;min-width:0}
+.zone.freezer{background:linear-gradient(180deg,#d4e8f6,#b9d6ec);}
+:root[data-theme="dark"] .zone.freezer{background:linear-gradient(180deg,#22425a,#1a3447)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .zone.freezer{background:linear-gradient(180deg,#22425a,#1a3447)}}
+.col{display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.col.door{flex:0 0 36%}
+.seam{display:flex;justify-content:space-between;padding:0 10px}
+.handle{width:7px;height:44px;border-radius:6px;background:var(--steel)}
+.handle.h{width:70px;height:7px}
+
+.comp{position:relative;display:flex;flex-direction:column;gap:6px;text-align:left;width:100%;min-height:78px;padding:10px 10px 12px;border:0;border-radius:12px;background:rgba(255,255,255,.55);border-bottom:4px solid var(--glass);transition:transform .12s,opacity .15s}
+:root[data-theme="dark"] .comp{background:rgba(255,255,255,.06)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .comp{background:rgba(255,255,255,.06)}}
+.comp:hover{transform:translateY(-1px)}
+.comp.dim{opacity:.35}
+.comp.hit{box-shadow:0 0 0 3px var(--accent)}
+.comp.door{flex:1}
+.comp.drawer{border-bottom-width:4px;border-radius:12px 12px 16px 16px}
+.cn{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.cn span:first-child{font:700 15px/1.1 var(--display);letter-spacing:-.005em}
+.cnt{font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+.chip{background:var(--chip);color:var(--chip-ink);border-radius:8px;padding:2px 8px;font-size:12.5px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip.warn{background:var(--warn-bg);color:var(--warn)}
+.chip.bad{background:var(--bad-bg);color:var(--bad)}
+.chip.more{background:none;color:var(--ink-2);padding-inline:2px}
+.empty{font-size:12.5px;color:var(--ink-2)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warn);margin-right:5px;vertical-align:1px}
+.dot.bad{background:var(--bad)}
+.light{height:5px;margin:0 auto;width:46%;border-radius:0 0 8px 8px;background:linear-gradient(180deg,#fff,rgba(255,255,255,0));opacity:.8}
+
+/* foglio di apertura */
+.scrim{position:fixed;inset:0;background:rgba(6,16,19,.5);display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.sheet{background:var(--sheet);width:100%;max-width:520px;max-height:88%;overflow:auto;border-radius:24px 24px 0 0;padding:18px 18px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)}
+.sh-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sh-top input{font:700 24px/1.1 var(--display);letter-spacing:-.01em;border:0;background:none;padding:4px 0;min-width:0;width:100%;border-bottom:2px solid transparent}
+.sh-top input:focus{border-bottom-color:var(--accent);outline:none}
+.close{border:0;background:var(--field);border-radius:50%;width:38px;height:38px;flex:none;font-size:20px;line-height:1}
+.add{display:flex;gap:8px}
+.add input{flex:1;min-width:0;border:1px solid var(--line);background:var(--field);border-radius:12px;padding:12px 14px}
+.btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:12px;padding:12px 18px;font-weight:700}
+.btn.ghost{background:var(--field);color:var(--ink)}
+.btn.danger{background:var(--bad-bg);color:var(--bad)}
+.quick{display:flex;flex-wrap:wrap;gap:6px}
+.quick button{border:1px dashed var(--steel);background:none;border-radius:999px;padding:5px 12px;font-size:13.5px;color:var(--ink-2)}
+.quick button:hover{border-color:var(--accent);color:var(--accent)}
+.list{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n x" "m m";gap:6px 8px;background:var(--field);border-radius:14px;padding:10px}
+.row .n{grid-area:n;width:100%;border:0;background:none;font-weight:500;padding:4px 2px;min-width:0}
+.row .x{grid-area:x;border:0;background:none;color:var(--ink-2);font-size:22px;line-height:1;width:34px;height:34px;border-radius:50%}
+.row .x:hover{background:var(--bad-bg);color:var(--bad)}
+.row .meta{grid-area:m;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+.row .q,.row .d{display:flex;gap:6px;align-items:center;min-width:0}
+.row input.f{border:1px solid var(--line);background:var(--sheet);border-radius:9px;padding:6px 9px;font-size:14px;min-width:0}
+.row input.qty{width:96px}
+.row input.date{width:150px}
+.row label{font-size:12px;color:var(--ink-2)}
+.tag{font-size:12px;font-weight:700;border-radius:8px;padding:2px 8px;white-space:nowrap}
+.tag.warn{background:var(--warn-bg);color:var(--warn)}
+.tag.bad{background:var(--bad-bg);color:var(--bad)}
+.none{color:var(--ink-2);text-align:center;padding:14px 0;font-size:14px}
+
+/* impostazione iniziale */
+.setup{background:var(--enamel);border:2px solid var(--steel);border-radius:26px;padding:20px;display:flex;flex-direction:column;gap:18px;box-shadow:var(--shadow)}
+.setup h2{font:700 22px/1.1 var(--display);margin:0}
+.setup p{margin:0;color:var(--ink-2);font-size:14.5px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.opt strong{font-weight:500}
+.step{display:flex;align-items:center;gap:12px}
+.step button{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--field);font-size:22px;line-height:1}
+.step output{min-width:24px;text-align:center;font:700 22px var(--display);font-variant-numeric:tabular-nums}
+.tog{appearance:none;width:50px;height:30px;border-radius:999px;background:var(--steel);position:relative;border:0;transition:background .15s;flex:none}
+.tog::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .15s}
+.tog:checked{background:var(--accent)}
+.tog:checked::after{transform:translateX(20px)}
+.plate{align-self:center;margin-top:2px;padding:7px 18px;border-radius:999px;background:linear-gradient(180deg,var(--field),var(--line));border:1px solid var(--steel);font:700 14px/1 var(--display);letter-spacing:.02em;color:var(--ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+.cap{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-top:4px}
+.sw{display:flex;flex-wrap:wrap;gap:10px}
+.sw button{width:38px;height:38px;border-radius:50%;border:3px solid transparent;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.sw button[aria-pressed="true"]{border-color:var(--ink)}
+.cust{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--field);border-radius:12px;padding:8px 12px;font-size:15px}
+.cust input{width:54px;height:34px;border:0;background:none;padding:0}
+.seg{display:flex;background:var(--field);border-radius:12px;padding:3px;gap:3px}
+.seg button{flex:1;border:0;background:none;border-radius:9px;padding:9px 6px;font-weight:500;font-size:14.5px}
+.seg button[aria-pressed="true"]{background:var(--sheet);box-shadow:0 1px 3px rgba(0,0,0,.18);font-weight:700}
+.fonts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fonts button{border:0;border-radius:12px;background:var(--field);padding:12px 8px;font-size:17px}
+.fonts button[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--accent);color:var(--accent)}
+.rng{display:flex;align-items:center;gap:12px}
+.rng input{flex:1;accent-color:var(--accent)}
+.ttl{width:100%;border:1px solid var(--line);background:var(--field);border-radius:12px;padding:12px 14px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;z-index:30;max-width:90%}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap" id="app"></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+(function(){
+var LS='frigo-v1';
+var S={comps:null,example:false,hl:null,q:'',open:null,setup:false,cfg:{shelves:3,freezer:true,drawer:true,door:true},look:{title:'Il mio frigo',accent:'#117f92',theme:'auto',font:'orig',size:100}};
+var FONTS=[['orig','Originale',"'Bricolage Grotesque','Avenir Next','Segoe UI',system-ui,sans-serif","'DM Sans','Segoe UI',system-ui,-apple-system,sans-serif"],['sys','Sistema','system-ui,-apple-system,Roboto,sans-serif','system-ui,-apple-system,Roboto,sans-serif'],['nun','Arrotondato',"'Nunito',system-ui,sans-serif","'Nunito',system-ui,sans-serif"],['pop','Moderno',"'Poppins',system-ui,sans-serif","'Poppins',system-ui,sans-serif"],['lor','Elegante',"'Lora',Georgia,serif","'Lora',Georgia,serif"],['cav','A mano',"'Caveat','Segoe Script',cursive","'Caveat','Segoe Script',cursive"],['mono','Tecnico',"'JetBrains Mono',ui-monospace,Menlo,monospace","'JetBrains Mono',ui-monospace,Menlo,monospace"]];
+var COLORS=['#117f92','#007aff','#2f9e44','#8e5bd9','#e0457b','#e8740c','#d93a2b','#667781'];
+var $=function(s,r){return (r||document).querySelector(s)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function nid(){return 'i'+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-3)}
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim()}
+function plural(n,a,b){return n+' '+(n===1?a:b)}
+function today(){var d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function iso(d){var m=d.getMonth()+1,g=d.getDate();return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(g<10?'0':'')+g}
+function daysTo(s){if(!s)return null;var p=s.split('-');if(p.length<3)return null;var d=new Date(+p[0],+p[1]-1,+p[2]);return Math.round((d-today())/86400000)}
+function status(it){var n=daysTo(it.exp);if(n===null)return null;if(n<0)return {k:'bad',t:'Scaduto',n:n};if(n===0)return {k:'warn',t:'Scade oggi',n:n};if(n<=3)return {k:'warn',t:n===1?'Scade domani':'Scade tra '+n+' giorni',n:n};return null}
+var toastT;function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},2200)}
+
+var QUICK={freezer:['Gelato','Piselli','Bastoncini di pesce','Pane'],shelf:['Latte','Uova','Burro','Yogurt','Formaggio','Prosciutto'],drawer:['Insalata','Carote','Zucchine','Pomodori','Mele'],door:['Succo','Acqua','Salsa','Maionese','Senape']};
+var NAMES={freezer:'Freezer',drawer:'Cassetto verdure',door:'Porta'};
+
+function build(cfg){
+  var a=[],i;
+  if(cfg.freezer)a.push({id:nid(),kind:'freezer',name:NAMES.freezer,items:[]});
+  for(i=1;i<=cfg.shelves;i++)a.push({id:nid(),kind:'shelf',name:'Ripiano '+i,items:[]});
+  if(cfg.drawer)a.push({id:nid(),kind:'drawer',name:NAMES.drawer,items:[]});
+  if(cfg.door)a.push({id:nid(),kind:'door',name:NAMES.door,items:[]});
+  return a;
+}
+function it(name,qty,off){return {id:nid(),name:name,qty:qty||'',exp:off==null?'':iso(new Date(today().getTime()+off*86400000))}}
+function example(){
+  var c=build({shelves:3,freezer:true,drawer:true,door:true});
+  c[0].items=[it('Piselli','500 g'),it('Gelato alla vaniglia','1 vaschetta'),it('Bastoncini di pesce','8')];
+  c[1].items=[it('Latte fresco','1 l',1),it('Yogurt greco','2 vasetti',6),it('Burro','1 panetto',20)];
+  c[2].items=[it('Petto di pollo','400 g',2),it('Mozzarella','2',-1),it('Uova','6',14)];
+  c[3].items=[it('Avanzi di lasagne','1 porzione',3)];
+  c[4].items=[it('Zucchine','3',7),it('Carote','1 kg',12),it('Insalata','1 cespo')];
+  c[5].items=[it('Succo di arancia','1 l',30),it('Maionese'),it('Senape')];
+  return c;
+}
+
+function save(){try{localStorage.setItem(LS,JSON.stringify({comps:S.comps,example:S.example,cfg:S.cfg,look:S.look}))}catch(e){}}
+function load(){try{var a=JSON.parse(localStorage.getItem(LS)||'null');if(a&&Array.isArray(a.comps)){S.comps=a.comps;S.example=!!a.example;if(a.cfg)S.cfg=a.cfg;if(a.look)Object.keys(a.look).forEach(function(k){S.look[k]=a.look[k]});return true}}catch(e){}return false}
+function loadLook(){try{var a=JSON.parse(localStorage.getItem(LS)||'null');if(a&&a.look)Object.keys(a.look).forEach(function(k){S.look[k]=a.look[k]})}catch(e){}}
+function find(id){return S.comps.find(function(c){return c.id===id})}
+function total(){return S.comps.reduce(function(n,c){return n+c.items.length},0)}
+function soon(){var out=[];S.comps.forEach(function(c){c.items.forEach(function(i){var s=status(i);if(s)out.push({c:c,i:i,s:s})})});return out}
+
+function compHtml(c){
+  var q=norm(S.q),items=c.items,worst=null,hits=0,cls='comp '+c.kind;
+  items.forEach(function(i){var s=status(i);if(s&&(!worst||s.k==='bad'))worst=s.k;if(q&&norm(i.name).indexOf(q)>=0)hits++});
+  if(S.hl==='soon'){cls+=items.some(function(i){return status(i)})?' hit':' dim'}
+  else if(q){cls+=(hits||norm(c.name).indexOf(q)>=0)?' hit':' dim'}
+  var chips='';
+  items.slice(0,4).forEach(function(i){var s=status(i);chips+='<span class="chip'+(s?' '+s.k:'')+'">'+esc(i.name)+'</span>'});
+  if(items.length>4)chips+='<span class="chip more">+'+(items.length-4)+'</span>';
+  return '<button class="'+cls+'" data-open="'+c.id+'" type="button" aria-label="'+esc(c.name)+', '+plural(items.length,'prodotto','prodotti')+'">'
+   +'<span class="cn"><span>'+esc(c.name)+'</span><span class="cnt">'+(worst?'<i class="dot'+(worst==='bad'?' bad':'')+'"></i>':'')+items.length+'</span></span>'
+   +(items.length?'<span class="chips">'+chips+'</span>':'<span class="empty">Vuoto, tocca per riempire</span>')+'</button>';
+}
+function fridgeHtml(){
+  var fz=S.comps.filter(function(c){return c.kind==='freezer'}),sh=S.comps.filter(function(c){return c.kind==='shelf'}),dr=S.comps.filter(function(c){return c.kind==='drawer'}),dz=S.comps.filter(function(c){return c.kind==='door'});
+  var h='<div class="fridge" role="group" aria-label="Frigorifero">';
+  if(fz.length){h+='<div class="zone freezer"><div class="col">'+fz.map(compHtml).join('')+'</div></div><div class="seam"><span class="handle h" style="margin-left:6px"></span><span></span></div>'}
+  h+='<div class="zone"><div class="col">'+sh.map(compHtml).join('')+dr.map(compHtml).join('')+'</div>';
+  if(dz.length)h+='<div class="col door">'+dz.map(compHtml).join('')+'</div>';
+  h+='</div><div class="plate">Frigo di Maria Marra</div></div>';
+  return h;
+}
+function view(){
+  var app=$('#app');
+  if(S.setup||!S.comps){app.innerHTML=setupHtml();return}
+  var n=total(),s=soon(),h='<header><div><h1>'+esc(S.look.title)+'</h1><div class="sub">'+(n?plural(n,'prodotto','prodotti')+' in '+plural(S.comps.length,'scomparto','scomparti'):'Ancora vuoto: tocca uno scomparto per riempirlo')+'</div></div><button class="iconbtn" data-act="settings" type="button">Impostazioni</button></header>';
+  h+='<div class="search"><input id="q" type="search" placeholder="Cerca un prodotto (es. uova)" value="'+esc(S.q)+'" autocomplete="off" aria-label="Cerca un prodotto"></div>';
+  if(s.length)h+='<button class="alert warn" data-act="soon" type="button"><span><b>'+plural(s.length,'prodotto','prodotti')+'</b> da usare presto</span><span>'+(S.hl==='soon'?'Mostra tutto':'Evidenzia')+'</span></button>';
+  else if(n)h+='<div class="alert ok">Niente in scadenza nei prossimi giorni</div>';
+  if(S.example)h+='<div class="example"><span>Questo è un esempio, non il tuo frigo.</span><button data-act="clear" type="button">Svuota tutto</button></div>';
+  h+=fridgeHtml();
+  app.innerHTML=h;
+}
+function setupHtml(){
+  var c=S.cfg,first=!S.comps;
+  return '<header><div><h1>'+esc(S.look.title)+'</h1><div class="sub">'+(first?'Prima di cominciare':'Riorganizza gli scomparti')+'</div></div>'+(first?'':'<button class="iconbtn" data-act="back" type="button">Annulla</button>')+'</header>'
+  +'<div class="setup"><div><h2>Com\'è fatto il tuo frigo?</h2><p style="margin-top:6px">Scegli gli scomparti. Potrai cambiarli quando vuoi e i prodotti restano dove sono.</p></div>'
+  +'<div class="opt"><strong>Ripiani</strong><div class="step"><button data-act="dec" type="button" aria-label="Meno ripiani">−</button><output id="nsh" aria-live="polite">'+c.shelves+'</output><button data-act="inc" type="button" aria-label="Più ripiani">+</button></div></div>'
+  +'<label class="opt"><strong>Freezer in alto</strong><input class="tog" id="o-fz" type="checkbox" role="switch"'+(c.freezer?' checked':'')+'></label>'
+  +'<label class="opt"><strong>Cassetto verdure</strong><input class="tog" id="o-dr" type="checkbox" role="switch"'+(c.drawer?' checked':'')+'></label>'
+  +'<label class="opt"><strong>Ripiani della porta</strong><input class="tog" id="o-dz" type="checkbox" role="switch"'+(c.door?' checked':'')+'></label>'
+  +'<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-act="make" type="button">'+(first?'Crea il frigo':'Applica')+'</button>'+(first?'<button class="btn ghost" data-act="demo" type="button">Guarda un esempio</button>':'')+'</div></div>';
+}
+
+/* foglio di un scomparto */
+function rowHtml(i){
+  var s=status(i);
+  return '<li class="row" data-id="'+i.id+'"><input class="n" data-f="name" value="'+esc(i.name)+'" aria-label="Nome del prodotto">'
+   +'<button class="x" data-del="'+i.id+'" type="button" aria-label="Togli '+esc(i.name)+'">×</button>'
+   +'<div class="meta"><div class="q"><label for="q-'+i.id+'">Quantità</label><input class="f qty" id="q-'+i.id+'" data-f="qty" value="'+esc(i.qty)+'" placeholder="es. 2" autocomplete="off"></div>'
+   +'<div class="d">'+(s?'<span class="tag '+s.k+'">'+s.t+'</span>':'')+'<label for="d-'+i.id+'">Scade</label><input class="f date" id="d-'+i.id+'" data-f="exp" type="date" value="'+esc(i.exp)+'"></div></div></li>';
+}
+function sheetHtml(c){
+  var qk=(QUICK[c.kind]||QUICK.shelf).filter(function(n){return !c.items.some(function(i){return norm(i.name)===norm(n)})});
+  return '<div class="scrim" data-act="shut"><div class="sheet" role="dialog" aria-modal="true" aria-label="'+esc(c.name)+'">'
+   +'<div class="sh-top"><input id="cname" value="'+esc(c.name)+'" aria-label="Nome dello scomparto"><button class="close" data-act="shut" type="button" aria-label="Chiudi">×</button></div>'
+   +'<form class="add" id="addf"><input id="newit" placeholder="Cosa metti qui dentro?" autocomplete="off" aria-label="Nuovo prodotto"><button class="btn" type="submit">Aggiungi</button></form>'
+   +(qk.length?'<div class="quick">'+qk.map(function(n){return '<button type="button" data-quick="'+esc(n)+'">+ '+esc(n)+'</button>'}).join('')+'</div>':'')
+   +'<ul class="list" id="list">'+(c.items.length?c.items.map(rowHtml).join(''):'<li class="none">Vuoto. Aggiungi il primo prodotto.</li>')+'</ul>'
+   +(c.items.length?'<button class="btn danger" data-act="empty" id="emptybtn" type="button">Svuota questo scomparto</button>':'')
+   +'</div></div>';
+}
+var lastFocus=null;
+function openComp(id){
+  S.open=id;lastFocus=document.activeElement;
+  var c=find(id),host=document.createElement('div');host.id='sheetHost';host.innerHTML=sheetHtml(c);
+  document.body.appendChild(host);
+  $('#newit').focus({preventScroll:true});
+}
+function refreshSheet(keep){
+  var c=find(S.open);if(!c)return;
+  var host=$('#sheetHost'),sc=host.querySelector('.sheet').scrollTop;
+  host.innerHTML=sheetHtml(c);host.querySelector('.sheet').scrollTop=sc;
+  if(keep!==false)$('#newit').focus({preventScroll:true});
+}
+function closeSheet(){
+  var h=$('#sheetHost');if(h)h.remove();
+  S.open=null;save();view();
+  if(lastFocus&&lastFocus.focus)try{lastFocus.focus({preventScroll:true})}catch(e){}
+}
+function addItem(name){
+  var c=find(S.open);name=String(name||'').trim();if(!name)return;
+  c.items.unshift({id:nid(),name:name,qty:'',exp:''});save();refreshSheet();
+}
+
+document.addEventListener('click',function(e){
+  var t=e.target;
+  var cc=t.closest('[data-col]');if(cc){S.look.accent=cc.dataset.col;applyLook();save();renderSettings();return}
+  var fn=t.closest('[data-font]');if(fn){S.look.font=fn.dataset.font;applyLook();save();renderSettings();return}
+  var ts=t.closest('[data-theme-set]');if(ts){S.look.theme=ts.dataset.themeSet;applyLook();save();renderSettings();return}
+  var o=t.closest('[data-open]');if(o){openComp(o.dataset.open);return}
+  var q=t.closest('[data-quick]');if(q){addItem(q.dataset.quick);return}
+  var d=t.closest('[data-del]');
+  if(d){var c=find(S.open);c.items=c.items.filter(function(i){return i.id!==d.dataset.del});save();refreshSheet(false);return}
+  var a=t.closest('[data-act]');if(!a)return;
+  var act=a.dataset.act;
+  if(act==='shut'){if(t.closest('.sheet')&&!t.closest('.close')&&t!==a)return;closeSheet();return}
+  if(act==='empty'){
+    if(a.dataset.sure){var c2=find(S.open);c2.items=[];save();refreshSheet(false);toast('Scomparto svuotato');return}
+    a.dataset.sure='1';a.textContent='Tocca ancora per svuotare';setTimeout(function(){if(a.isConnected){delete a.dataset.sure;a.textContent='Svuota questo scomparto'}},3000);return;
+  }
+  if(act==='settings'){openSettings();return}
+  if(act==='shutset'){if(t.closest('.sheet')&&!t.closest('.close')&&t!==a)return;closeSettings();return}
+  if(act==='reorg'){var hh=$('#setHost');if(hh)hh.remove();S.setup=true;view();return}
+  if(act==='soon'){S.hl=S.hl==='soon'?null:'soon';S.q='';view();return}
+  if(act==='setup'){S.setup=true;view();return}
+  if(act==='back'){S.setup=false;view();return}
+  if(act==='inc'){S.cfg.shelves=Math.min(6,S.cfg.shelves+1);$('#nsh').textContent=S.cfg.shelves;return}
+  if(act==='dec'){S.cfg.shelves=Math.max(1,S.cfg.shelves-1);$('#nsh').textContent=S.cfg.shelves;return}
+  if(act==='make'){reorg();return}
+  if(act==='demo'){S.comps=example();S.example=true;S.setup=false;save();view();return}
+  if(act==='clear'){
+    if(a.dataset.sure){S.comps.forEach(function(c){c.items=[]});S.example=false;save();view();toast('Frigo svuotato');return}
+    a.dataset.sure='1';a.textContent='Tocca ancora per confermare';setTimeout(function(){if(a.isConnected){delete a.dataset.sure;a.textContent='Svuota tutto'}},3000);return;
+  }
+});
+function applyLook(){
+  var r=document.documentElement,L=S.look;
+  r.style.zoom=((Math.min(150,Math.max(80,Number(L.size)||100)))/100).toFixed(2);
+  r.style.setProperty('--accent-user',L.accent||'#117f92');
+  if(L.theme==='light'||L.theme==='dark')r.setAttribute('data-theme',L.theme);else r.removeAttribute('data-theme');
+  var f=FONTS.filter(function(x){return x[0]===L.font})[0]||FONTS[0];
+  r.style.setProperty('--display',f[2]);r.style.setProperty('--body',f[3]);
+}
+function settingsHtml(){
+  var L=S.look;
+  var sw=COLORS.map(function(c){return '<button type="button" data-col="'+c+'" style="background:'+c+'" aria-pressed="'+(L.accent.toLowerCase()===c)+'" aria-label="Colore '+c+'"></button>'}).join('');
+  var th=[['auto','Automatico'],['light','Chiaro'],['dark','Scuro']].map(function(t){return '<button type="button" data-theme-set="'+t[0]+'" aria-pressed="'+(L.theme===t[0])+'">'+t[1]+'</button>'}).join('');
+  var fb=FONTS.map(function(f){return '<button type="button" data-font="'+f[0]+'" aria-pressed="'+(L.font===f[0])+'" style="font-family:'+f[2].replace(/"/g,'&quot;')+'">'+f[1]+'</button>'}).join('');
+  return '<div class="scrim" data-act="shutset"><div class="sheet" role="dialog" aria-modal="true" aria-label="Impostazioni">'
+   +'<div class="sh-top"><h2 style="font:700 24px/1.1 var(--display);margin:4px 0">Impostazioni</h2><button class="close" data-act="shutset" type="button" aria-label="Chiudi">×</button></div>'
+   +'<div class="cap">Titolo</div><input class="ttl" id="ttl" value="'+esc(L.title)+'" maxlength="40" aria-label="Titolo dell\'app" autocomplete="off">'
+   +'<div class="cap">Colore</div><div class="sw">'+sw+'</div><label class="cust"><span>Colore a scelta</span><input type="color" id="cust" value="'+esc(L.accent)+'"></label>'
+   +'<div class="cap">Aspetto</div><div class="seg">'+th+'</div>'
+   +'<div class="cap">Carattere</div><div class="fonts">'+fb+'</div>'
+   +'<div class="cap">Grandezza del testo <span id="szv">'+L.size+'%</span></div><div class="rng"><span style="font-size:13px">A</span><input id="fsz" type="range" min="80" max="150" step="5" value="'+L.size+'" aria-label="Grandezza del testo"><span style="font-size:24px">A</span></div>'
+   +'<div class="cap">Scomparti</div><button class="btn ghost" data-act="reorg" type="button">Riorganizza ripiani, freezer e porta</button>'
+   +'</div></div>';
+}
+function openSettings(){lastFocus=document.activeElement;var h=document.createElement('div');h.id='setHost';h.innerHTML=settingsHtml();document.body.appendChild(h)}
+function renderSettings(){var h=$('#setHost');if(!h)return;var sc=h.querySelector('.sheet').scrollTop;h.innerHTML=settingsHtml();h.querySelector('.sheet').scrollTop=sc}
+function closeSettings(){var h=$('#setHost');if(h)h.remove();save();view()}
+function reorg(){
+  S.cfg.freezer=$('#o-fz').checked;S.cfg.drawer=$('#o-dr').checked;S.cfg.door=$('#o-dz').checked;
+  var old=S.comps||[],fresh=build(S.cfg),pool=[],used={};
+  fresh.forEach(function(n){
+    var m=old.find(function(o){return !used[o.id]&&o.kind===n.kind&&(n.kind!=='shelf'||true)&&!o._m});
+    if(m){used[m.id]=1;m._m=1;n.items=m.items;if(m.name&&!(/^Ripiano \d+$/.test(m.name)&&n.kind==='shelf'))n.name=m.name}
+  });
+  old.forEach(function(o){delete o._m;if(!used[o.id])pool=pool.concat(o.items)});
+  if(pool.length){var tgt=fresh.filter(function(c){return c.kind==='shelf'}).pop()||fresh[0];tgt.items=tgt.items.concat(pool);toast('I prodotti degli scomparti tolti sono nell\'ultimo ripiano')}
+  S.comps=fresh;S.setup=false;S.hl=null;save();view();
+}
+document.addEventListener('submit',function(e){if(e.target.id==='addf'){e.preventDefault();var i=$('#newit');addItem(i.value);}});
+document.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.id==='q'){S.q=t.value;S.hl=null;var pos=t.selectionStart;view();var n=$('#q');n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}}
+  if(t.id==='ttl'){S.look.title=t.value.trim()||'Il mio frigo';save();return}
+  if(t.id==='cust'){S.look.accent=t.value;applyLook();save();return}
+  if(t.id==='fsz'){S.look.size=Number(t.value)||100;applyLook();save();var v=$('#szv');if(v)v.textContent=S.look.size+'%';return}
+  if(t.id==='cname'){var c=find(S.open);if(c){c.name=t.value||c.name;save()}}
+});
+document.addEventListener('change',function(e){
+  var t=e.target,f=t.dataset&&t.dataset.f;if(!f)return;
+  var row=t.closest('.row'),c=find(S.open),i=c&&c.items.find(function(x){return x.id===row.dataset.id});if(!i)return;
+  if(f==='name'&&!t.value.trim()){t.value=i.name;return}
+  i[f]=t.value.trim();save();if(f==='exp')refreshSheet(false);
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if($('#setHost'))closeSettings();else if(S.open)closeSheet()}});
+
+if(!load()){S.comps=example();S.example=true;loadLook()}
+applyLook();view();
+})();
+</script>
