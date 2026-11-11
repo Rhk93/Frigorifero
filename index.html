@@ -1,4 +1,4 @@
-<title>Frigo di Maria Marra</title>
+<title>Frigorifero</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500;700&display=swap">
 <style>
@@ -170,7 +170,7 @@ h1{font:700 clamp(30px,8vw,38px)/1 var(--display);letter-spacing:-.02em;margin:0
 <script>
 (function(){
 var LS='frigo-v1';
-var S={comps:null,example:false,hl:null,q:'',open:null,setup:false,cfg:{shelves:3,freezer:true,drawer:true,door:true},look:{title:'Il mio frigo',accent:'#117f92',theme:'auto',font:'orig',size:100}};
+var S={comps:null,example:false,hl:null,q:'',open:null,setup:false,cfg:{shelves:3,freezer:true,drawer:true,door:true},look:{title:'Frigorifero',plate:'',accent:'#117f92',theme:'auto',font:'orig',size:100}};
 var FONTS=[['orig','Originale',"'Bricolage Grotesque','Avenir Next','Segoe UI',system-ui,sans-serif","'DM Sans','Segoe UI',system-ui,-apple-system,sans-serif"],['sys','Sistema','system-ui,-apple-system,Roboto,sans-serif','system-ui,-apple-system,Roboto,sans-serif'],['nun','Arrotondato',"'Nunito',system-ui,sans-serif","'Nunito',system-ui,sans-serif"],['pop','Moderno',"'Poppins',system-ui,sans-serif","'Poppins',system-ui,sans-serif"],['lor','Elegante',"'Lora',Georgia,serif","'Lora',Georgia,serif"],['cav','A mano',"'Caveat','Segoe Script',cursive","'Caveat','Segoe Script',cursive"],['mono','Tecnico',"'JetBrains Mono',ui-monospace,Menlo,monospace","'JetBrains Mono',ui-monospace,Menlo,monospace"]];
 var COLORS=['#117f92','#007aff','#2f9e44','#8e5bd9','#e0457b','#e8740c','#d93a2b','#667781'];
 var $=function(s,r){return (r||document).querySelector(s)};
@@ -232,7 +232,7 @@ function fridgeHtml(){
   if(fz.length){h+='<div class="zone freezer"><div class="col">'+fz.map(compHtml).join('')+'</div></div><div class="seam"><span class="handle h" style="margin-left:6px"></span><span></span></div>'}
   h+='<div class="zone"><div class="col">'+sh.map(compHtml).join('')+dr.map(compHtml).join('')+'</div>';
   if(dz.length)h+='<div class="col door">'+dz.map(compHtml).join('')+'</div>';
-  h+='</div><div class="plate">Frigo di Maria Marra</div></div>';
+  h+='</div>'+(S.look.plate?'<div class="plate">'+esc(S.look.plate)+'</div>':'')+'</div>';
   return h;
 }
 function view(){
@@ -345,6 +345,7 @@ function settingsHtml(){
   return '<div class="scrim" data-act="shutset"><div class="sheet" role="dialog" aria-modal="true" aria-label="Impostazioni">'
    +'<div class="sh-top"><h2 style="font:700 24px/1.1 var(--display);margin:4px 0">Impostazioni</h2><button class="close" data-act="shutset" type="button" aria-label="Chiudi">×</button></div>'
    +'<div class="cap">Titolo</div><input class="ttl" id="ttl" value="'+esc(L.title)+'" maxlength="40" aria-label="Titolo dell\'app" autocomplete="off">'
+   +'<div class="cap">Targhetta sul frigo (firma)</div><input class="ttl" id="plate" value="'+esc(L.plate||'')+'" maxlength="40" placeholder="Scrivi un nome, o lascia vuoto" aria-label="Targhetta sul frigo" autocomplete="off">'
    +'<div class="cap">Colore</div><div class="sw">'+sw+'</div><label class="cust"><span>Colore a scelta</span><input type="color" id="cust" value="'+esc(L.accent)+'"></label>'
    +'<div class="cap">Aspetto</div><div class="seg">'+th+'</div>'
    +'<div class="cap">Carattere</div><div class="fonts">'+fb+'</div>'
@@ -370,7 +371,8 @@ document.addEventListener('submit',function(e){if(e.target.id==='addf'){e.preven
 document.addEventListener('input',function(e){
   var t=e.target;
   if(t.id==='q'){S.q=t.value;S.hl=null;var pos=t.selectionStart;view();var n=$('#q');n.focus();try{n.setSelectionRange(pos,pos)}catch(x){}}
-  if(t.id==='ttl'){S.look.title=t.value.trim()||'Il mio frigo';save();return}
+  if(t.id==='ttl'){S.look.title=t.value.trim()||'Frigorifero';save();return}
+  if(t.id==='plate'){S.look.plate=t.value.trim();save();return}
   if(t.id==='cust'){S.look.accent=t.value;applyLook();save();return}
   if(t.id==='fsz'){S.look.size=Number(t.value)||100;applyLook();save();var v=$('#szv');if(v)v.textContent=S.look.size+'%';return}
   if(t.id==='cname'){var c=find(S.open);if(c){c.name=t.value||c.name;save()}}

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Costruisce l'APK di "Frigo di Maria Marra" con Capacitor. Pensato per GitHub Actions (Ubuntu, Node 20, Java 17).
+# Costruisce l'APK di "Frigorifero" con Capacitor. Pensato per GitHub Actions (Ubuntu, Node 20, Java 17).
 set -euo pipefail
 
 ROOT="$(pwd)"
@@ -7,7 +7,7 @@ rm -rf app && mkdir app && cd app
 mkdir www && cp "$ROOT/index.html" www/index.html
 
 cat > package.json <<'EOF2'
-{"name":"frigo-maria","version":"1.0.0","private":true}
+{"name":"frigorifero","version":"1.0.0","private":true}
 EOF2
 
 npm install --no-audit --no-fund @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6 sharp
@@ -28,8 +28,8 @@ sed -i '/fonts.googleapis.com/d' www/index.html
 
 cat > capacitor.config.json <<'EOF2'
 {
-  "appId": "it.frigomaria.app",
-  "appName": "Frigo di Maria Marra",
+  "appId": "it.frigorifero.app",
+  "appName": "Frigorifero",
   "webDir": "www",
   "server": { "androidScheme": "https" },
   "android": { "backgroundColor": "#117f92" }
@@ -98,5 +98,5 @@ cd android
 chmod +x gradlew
 ./gradlew assembleDebug --no-daemon --console=plain
 
-cp app/build/outputs/apk/debug/app-debug.apk "$ROOT/FrigoMaria.apk"
-ls -la "$ROOT/FrigoMaria.apk"
+cp app/build/outputs/apk/debug/app-debug.apk "$ROOT/Frigorifero.apk"
+ls -la "$ROOT/Frigorifero.apk"
