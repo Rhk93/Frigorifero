@@ -1,0 +1,27 @@
+name: Costruisci APK
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Costruisci l'app
+        run: bash build.sh
+      - name: Pubblica l'APK
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "apk-${{ github.run_number }}" FrigoMaria.apk --title "Frigo Maria ${{ github.run_number }}" --notes "APK installabile"
