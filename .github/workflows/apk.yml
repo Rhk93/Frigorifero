@@ -24,4 +24,4 @@ jobs:
       - name: Pubblica l'APK
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "apk-${{ github.run_number }}" FrigoMaria.apk --title "Frigo Maria ${{ github.run_number }}" --notes "APK installabile"
+        run: gh release create "apk-${{ github.run_number }}" Frigorifero.apk --title "Frigo Maria ${{ github.run_number }}" --notes "APK installabile"
